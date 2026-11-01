@@ -12,6 +12,7 @@ https://cdn.jsdelivr.net/gh/kevenliu3/tuotuo-beasts@main/<目录>/<文件名>.jp
 |---|---|---|
 | 根目录 | 山海经神兽（30 只） | `<id>.jpg`，与 `utils/beasts.js` 的 id 对应 |
 | `fish/` | 池塘鱼（24 种） | `<id>.jpg`，与 `utils/fishes.js` 对应 |
+| `fish/sprite/` | 池塘鱼的透明立绘（24 种） | `<id>.png` 144×144，给 3D 领地当 Sprite 用 |
 | `hamster/` | 仓鼠（17 种） | `<id>.jpg`，与 `utils/hamsters.js` 对应 |
 | `parrot/` | 鹦鹉（16 种） | `<id>.jpg`，与 `utils/parrots.js` 对应 |
 
@@ -39,3 +40,16 @@ https://cdn.jsdelivr.net/gh/kevenliu3/tuotuo-beasts@main/<目录>/<文件名>.jp
 4. 生产环境记得把 `cdn.jsdelivr.net` 加进小程序后台的 downloadFile 合法域名。
 
 原图（1024 版）不进本仓，留在仓外 `../hamster_raw_src/`，要重裁时用。
+
+## 3D 立绘（sprite/）
+
+3D 领地里的宠物是 **billboard 立绘**（Sprite），所以需要透明背景的方形 PNG：
+
+| 目录 | 内容 | 规格 |
+|---|---|---|
+| `hamster/sprite/` | 仓鼠 17 张 | 160×160，抠图见 `tools/cut_hamster_bg.py` |
+| `fish/sprite/` | 鱼 24 张 | 144×144，抠图见 `tools/cut_pet_bg.py` |
+
+鱼的台面反光/阴影比仓鼠难抠得多 —— 仓鼠那套「逐行背景建模 + GrabCut」在鱼身上会把
+台面阴影整块留成灰板，`cut_pet_bg.py` 改用「饱和度 + 亮度」键控（中性又够亮的就是背景），
+再按洞的颜色决定填不填，最后等比缩进方形画布（不拉伸，鱼是横长的）。
